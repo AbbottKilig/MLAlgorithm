@@ -35,7 +35,7 @@ class KMeans(object):
 		clusterAssment = np.zeros((m,2))
 		centers = init_cluster_center(X,self.K)
 		clusterChanged = True
-		while clusterChanged and i < max_iterations:
+		while clusterChanged:
 			clusterChanged = False
 			for i in range(m):
 				minDis = np.inf, minIndex = -1
