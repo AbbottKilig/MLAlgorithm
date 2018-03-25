@@ -80,14 +80,32 @@ class DecisionTree(object):
 			subDataSet = self.splitDataSet(dataSet,bestFeature,value)
 			tree[bestFeatureLabel][value] = self.createTree(subDataSet,sublabels)
 		return tree
+	def fit(self,dataSet,labels):
+		self.featureLabels = labels.copy()
+		self.tree = self.createTree(dataSet,labels)
+
+
+	def predict(self,featVec,tree):
+		firstStr = list(tree.keys())[0]
+		secondDict = tree[firstStr]
+		featureIndex = self.featureLabels.index(firstStr)
+		for key in secondDict.keys():
+			if featVec[featureIndex] == key:
+				if type(secondDict[key]).__name__ == 'dict':
+					classLabel = self.predict(featVec,tree = secondDict[key])
+					return classLabel
+				else:
+					classLabel = secondDict[key]
+					return classLabel
+		
 
 
 #test
 dataSet = [[1,1,'y'],[1,1,'y'],[1,0,'n'],[0,1,'n'],[0,1,'n']]
 labels = ['no facing','flippers']
 dt = DecisionTree()
-print(dt.shannonEnt(dataSet))
-print(dt.splitDataSet(dataSet,0,1))
-print(dt.chooseBestFeatureTosplit(dataSet))
-print(dt.createTree(dataSet,labels))
+dt.fit(dataSet,labels)
+print(dt.tree)
 
+print(dataSet[0])
+print(dt.predict(dataSet[0],dt.tree))
