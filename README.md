@@ -1,4 +1,4 @@
-#MLAlgorithm
+## MLAlgorithm
 
 - OLS.py：线性回归
 - LassoRegression:lasso回归
@@ -9,3 +9,4 @@
 - KMeans:KMeans聚类
 - OneHidderLayerNN.py：三层神经网络（参考deep learning作业）
 - LinearRegression:梯度线性回归
+- XOR: 亦或函数训练代码
